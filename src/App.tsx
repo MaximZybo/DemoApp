@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import {RootStackNavigator} from '@/Navigation/RootStackNavigator';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>text</Text>
+    <SafeAreaView style={{flex: 1}}>
+      <RootStackNavigator />
     </SafeAreaView>
   );
 };
