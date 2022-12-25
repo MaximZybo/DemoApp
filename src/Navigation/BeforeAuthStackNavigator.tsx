@@ -10,7 +10,11 @@ const Stack = createNativeStackNavigator<BeforeAuthStackParamList>();
 export const BeforeAuthStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Onboarding" component={Onboarding} />
+      <Stack.Screen
+        name="Onboarding"
+        component={Onboarding}
+        options={{headerShown: false}}
+      />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
