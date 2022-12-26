@@ -8,7 +8,6 @@ export type ButtonProps = {
   title: string;
   type?: 'primary' | 'secondary' | 'tertiary';
   disabled?: boolean;
-  centered?: boolean;
   style?: StyleProp<ViewStyle>;
   onPress: () => void;
 };
@@ -17,7 +16,6 @@ export const Button = ({
   title,
   type = 'primary',
   disabled = false,
-  centered = true,
   style,
   onPress,
 }: ButtonProps) => {
@@ -53,7 +51,6 @@ export const Button = ({
   const mergedButtonStyle = StyleSheet.flatten([
     styles.basicButton,
     buttonStyle,
-    centered && styles.centered,
     style,
   ]);
 
@@ -75,14 +72,12 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   basicButton: {
-    borderWidth: 1,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 24,
     alignItems: 'center',
-  },
-  centered: {
-    alignSelf: 'center',
+    borderWidth: 1,
+    marginBottom: 20,
   },
   primaryButton: {
     backgroundColor: COLORS.BLACK,

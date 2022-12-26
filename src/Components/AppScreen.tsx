@@ -2,8 +2,8 @@ import React from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {Edge, SafeAreaView} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {ConditionalWrapper} from '@/Components/ConditionalWrapper';
 import {COLORS} from '@/Constants/Colors';
+import {LAYOUTS} from '@/Constants/Layouts';
 
 type AppScreenProps = {
   children: React.ReactNode;
@@ -18,21 +18,26 @@ export const AppScreen = ({
   isScroll = true,
   style,
   contentContainerStyle,
-  edges = ['top', 'right', 'left'],
+  edges = ['top', 'right', 'left', 'bottom'],
 }: AppScreenProps) => {
   return (
     <SafeAreaView edges={edges} style={[styles.container, style]}>
-      <ConditionalWrapper
-        condition={isScroll}
-        wrapper={(wrapperChildren: React.ReactNode) => (
-          <KeyboardAwareScrollView style={styles.keyboardAware} enableOnAndroid>
-            <>{wrapperChildren}</>
-          </KeyboardAwareScrollView>
-        )}>
+      {isScroll ? (
+        <KeyboardAwareScrollView
+          contentContainerStyle={[
+            styles.contentContainer,
+            contentContainerStyle,
+          ]}
+          bounces={false}
+          scrollEventThrottle={1}
+          showsVerticalScrollIndicator={false}>
+          {children}
+        </KeyboardAwareScrollView>
+      ) : (
         <View style={[styles.contentContainer, contentContainerStyle]}>
           {children}
         </View>
-      </ConditionalWrapper>
+      )}
     </SafeAreaView>
   );
 };
@@ -44,9 +49,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingHorizontal: 20,
-  },
-  keyboardAware: {
-    flex: 1,
+    paddingHorizontal: LAYOUTS.PADDING,
+    paddingBottom: LAYOUTS.PADDING,
   },
 });

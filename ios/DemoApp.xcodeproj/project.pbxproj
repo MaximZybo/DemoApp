@@ -12,10 +12,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-DemoApp-DemoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-DemoApp-DemoAppTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		158186C292D847B0A6BA6B0B /* KumbhSans-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAB68CE56BA440909CAD49A2 /* KumbhSans-bold.ttf */; };
 		1638C59CD8724AE5945F6BA9 /* KumbhSans-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA8E845D02644D62969E35AD /* KumbhSans-regular.ttf */; };
+		7699B88040F8A987B510C191 /* libPods-DemoApp-DemoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-DemoApp-DemoAppTests.a */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		FE3130A08A8A4ED98B875590 /* KumbhSans-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC589A946C5A4C3C903609FD /* KumbhSans-semibold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -46,10 +46,10 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-DemoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DemoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DemoApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-DemoApp-DemoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoApp-DemoAppTests.release.xcconfig"; path = "Target Support Files/Pods-DemoApp-DemoAppTests/Pods-DemoApp-DemoAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		CA8E845D02644D62969E35AD /* KumbhSans-regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-regular.ttf"; path = "../src/Assets/Fonts/KumbhSans-regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		FAB68CE56BA440909CAD49A2 /* KumbhSans-bold.ttf */ = {isa = PBXFileReference; name = "KumbhSans-bold.ttf"; path = "../src/Assets/Fonts/KumbhSans-bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CA8E845D02644D62969E35AD /* KumbhSans-regular.ttf */ = {isa = PBXFileReference; name = "KumbhSans-regular.ttf"; path = "../src/Assets/Fonts/KumbhSans-regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FC589A946C5A4C3C903609FD /* KumbhSans-semibold.ttf */ = {isa = PBXFileReference; name = "KumbhSans-semibold.ttf"; path = "../src/Assets/Fonts/KumbhSans-semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FAB68CE56BA440909CAD49A2 /* KumbhSans-bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-bold.ttf"; path = "../src/Assets/Fonts/KumbhSans-bold.ttf"; sourceTree = "<group>"; };
+		FC589A946C5A4C3C903609FD /* KumbhSans-semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "KumbhSans-semibold.ttf"; path = "../src/Assets/Fonts/KumbhSans-semibold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,15 +156,15 @@
 			sourceTree = "<group>";
 		};
 		EE9F5EE21A584A45B8419BE1 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				FAB68CE56BA440909CAD49A2 /* KumbhSans-bold.ttf */,
 				CA8E845D02644D62969E35AD /* KumbhSans-regular.ttf */,
 				FC589A946C5A4C3C903609FD /* KumbhSans-semibold.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
