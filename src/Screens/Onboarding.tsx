@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import {AppScreen} from '@/Components/AppScreen';
 import {Typography} from '@/Components/Typography';
+import {Button} from '@/Components/Buttons/Button';
 import {COLORS} from '@/Constants/Colors';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 
@@ -28,7 +29,27 @@ export const Onboarding = ({
       <Typography size="22" weight="bold">
         bold
       </Typography>
-      <Button title="Register" onPress={registerPress} />
+      <Button title="Register" onPress={registerPress} type="primary" />
+      <Button title="Register" onPress={registerPress} type="secondary" />
+      <Button title="Register" onPress={registerPress} type="tertiary" />
+      <Button
+        title="Register"
+        onPress={registerPress}
+        type="primary"
+        disabled
+      />
+      <Button
+        title="Register"
+        onPress={registerPress}
+        type="secondary"
+        disabled
+      />
+      <Button
+        title="Register"
+        onPress={registerPress}
+        type="tertiary"
+        disabled
+      />
     </AppScreen>
   );
 };

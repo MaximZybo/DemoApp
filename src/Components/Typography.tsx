@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-unused-styles */
 import React from 'react';
 import {
   Text,
@@ -59,10 +60,15 @@ export const Typography = ({
   const fontVariant = fontSizes[size];
   const fontFamily = `KumbhSans-${weight}`;
 
+  const typographyStyles = StyleSheet.flatten([
+    fontVariant,
+    {fontFamily},
+    !!color && {color},
+    style,
+  ]);
+
   return (
-    <Text
-      style={[fontVariant, {fontFamily}, !!color && {color}, style]}
-      {...restNativeProps}>
+    <Text style={typographyStyles} {...restNativeProps}>
       {children}
     </Text>
   );
