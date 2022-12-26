@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import {AppScreen} from '@/Components/AppScreen';
 import {Typography} from '@/Components/Typography';
 import {Button} from '@/Components/Buttons/Button';
+import {BaseInput} from '@/Components/Inputs/BaseInput';
 import {COLORS} from '@/Constants/Colors';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 
@@ -20,36 +21,22 @@ export const Onboarding = ({
         backgroundColor={COLORS.TRANSPARENT}
         barStyle="dark-content"
       />
-      <Typography size="16" weight="semibold">
-        semibold
-      </Typography>
+
       <Typography size="16" weight="regular">
         regular
       </Typography>
-      <Typography size="22" weight="bold">
-        bold
-      </Typography>
+      <BaseInput
+        label="label"
+        onChangeText={() => {}}
+        placeholder="placeholder"
+      />
+      <BaseInput
+        label="label"
+        onChangeText={() => {}}
+        editable={false}
+        placeholder="placeholder"
+      />
       <Button title="Register" onPress={registerPress} type="primary" />
-      <Button title="Register" onPress={registerPress} type="secondary" />
-      <Button title="Register" onPress={registerPress} type="tertiary" />
-      <Button
-        title="Register"
-        onPress={registerPress}
-        type="primary"
-        disabled
-      />
-      <Button
-        title="Register"
-        onPress={registerPress}
-        type="secondary"
-        disabled
-      />
-      <Button
-        title="Register"
-        onPress={registerPress}
-        type="tertiary"
-        disabled
-      />
     </AppScreen>
   );
 };
