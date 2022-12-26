@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, Button, StatusBar} from 'react-native';
+import {Button, StatusBar} from 'react-native';
 import {AppScreen} from '@/Components/AppScreen';
+import {Typography} from '@/Components/Typography';
 import {COLORS} from '@/Constants/Colors';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 
@@ -18,7 +19,15 @@ export const Onboarding = ({
         backgroundColor={COLORS.TRANSPARENT}
         barStyle="dark-content"
       />
-      <Text>Onboarding</Text>
+      <Typography size="16" weight="semibold">
+        semibold
+      </Typography>
+      <Typography size="16" weight="regular">
+        regular
+      </Typography>
+      <Typography size="22" weight="bold">
+        bold
+      </Typography>
       <Button title="Register" onPress={registerPress} />
     </AppScreen>
   );

@@ -1,0 +1,69 @@
+import React from 'react';
+import {
+  Text,
+  StyleSheet,
+  TextProps,
+  TextStyle,
+  StyleProp,
+  ColorValue,
+} from 'react-native';
+import {COLORS} from '@/Constants/Colors';
+
+const fontSizes = StyleSheet.create({
+  '22': {
+    fontSize: 22,
+    lineHeight: 27,
+  },
+  '20': {
+    fontSize: 20,
+    lineHeight: 25,
+  },
+  '16': {
+    fontSize: 16,
+    lineHeight: 20,
+  },
+  '14': {
+    fontSize: 14,
+    lineHeight: 17,
+  },
+  '12': {
+    fontSize: 12,
+    lineHeight: 15,
+  },
+  '10': {
+    fontSize: 10,
+    lineHeight: 12,
+  },
+});
+
+type FontWeight = 'bold' | 'semibold' | 'regular';
+
+type FontSize = keyof typeof fontSizes;
+
+type TypographyProps = TextProps & {
+  size: FontSize;
+  weight?: FontWeight;
+  color?: ColorValue;
+  children?: string | Element | Element[];
+  style?: StyleProp<TextStyle>;
+};
+
+export const Typography = ({
+  size,
+  weight = 'regular',
+  color = COLORS.GREY_800,
+  children,
+  style = {},
+  ...restNativeProps
+}: TypographyProps) => {
+  const fontVariant = fontSizes[size];
+  const fontFamily = `KumbhSans-${weight}`;
+
+  return (
+    <Text
+      style={[fontVariant, {fontFamily}, !!color && {color}, style]}
+      {...restNativeProps}>
+      {children}
+    </Text>
+  );
+};

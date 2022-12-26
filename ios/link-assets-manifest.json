@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/Assets/Fonts/KumbhSans-bold.ttf",
+      "sha1": "248f6cf6107bb3d1d50ae6b1aae7ef24e75bfb99"
+    },
+    {
+      "path": "src/Assets/Fonts/KumbhSans-regular.ttf",
+      "sha1": "68150e28c7da085e2a334468e199c9b04550fa1b"
+    },
+    {
+      "path": "src/Assets/Fonts/KumbhSans-semibold.ttf",
+      "sha1": "8da34a491e0d780fd621e69b1446ebb108a02182"
+    }
+  ]
+}
