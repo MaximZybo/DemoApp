@@ -12,7 +12,7 @@ import {
 import {COLORS} from '@/Constants/Colors';
 import {Typography} from '@/Components/Typography';
 
-type BaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
+type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void; // Replace optional to required
   label?: string;
   error?: string;
@@ -27,7 +27,7 @@ export const BaseInput = ({
   onFocus,
   onBlur,
   ...restProps
-}: BaseInputProps) => {
+}: TBaseInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const baseInputStyles = StyleSheet.flatten([

@@ -5,7 +5,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
 
-type AppScreenProps = {
+type TAppScreenProps = {
   children: React.ReactNode;
   isScroll?: boolean;
   style?: StyleProp<ViewStyle>;
@@ -19,7 +19,7 @@ export const AppScreen = ({
   style,
   contentContainerStyle,
   edges = ['top', 'right', 'left', 'bottom'],
-}: AppScreenProps) => {
+}: TAppScreenProps) => {
   return (
     <SafeAreaView edges={edges} style={[styles.container, style]}>
       {isScroll ? (

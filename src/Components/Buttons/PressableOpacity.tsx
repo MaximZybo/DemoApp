@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, PressableProps, StyleProp, ViewStyle} from 'react-native';
 
-export type PressableOpacityProps = PressableProps & {
+type TPressableOpacityProps = PressableProps & {
   style?: StyleProp<ViewStyle>;
 };
 
@@ -11,7 +11,7 @@ export const PressableOpacity = ({
   style,
   onPress,
   ...props
-}: PressableOpacityProps) => {
+}: TPressableOpacityProps) => {
   return (
     <Pressable
       style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, style]}

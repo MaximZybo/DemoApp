@@ -37,13 +37,13 @@ const fontSizes = StyleSheet.create({
   },
 });
 
-type FontWeight = 'bold' | 'semibold' | 'regular';
+type TFontWeight = 'bold' | 'semibold' | 'regular';
 
-type FontSize = keyof typeof fontSizes;
+type TFontSize = keyof typeof fontSizes;
 
-type TypographyProps = TextProps & {
-  size: FontSize;
-  weight?: FontWeight;
+type TTypographyProps = TextProps & {
+  size: TFontSize;
+  weight?: TFontWeight;
   color?: ColorValue;
   children?: string | Element | Element[];
   style?: StyleProp<TextStyle>;
@@ -56,7 +56,7 @@ export const Typography = ({
   children,
   style = {},
   ...restNativeProps
-}: TypographyProps) => {
+}: TTypographyProps) => {
   const fontVariant = fontSizes[size];
   const fontFamily = `KumbhSans-${weight}`;
 

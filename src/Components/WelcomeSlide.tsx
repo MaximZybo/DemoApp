@@ -5,7 +5,7 @@ import {Typography} from '@/Components/Typography';
 import {LAYOUTS} from '@/Constants/Layouts';
 
 export type TSlide = {
-  order: number;
+  id: string;
   title: string;
   content: string;
 };
@@ -20,9 +20,9 @@ export const WelcomeSlide = ({item}: TWelcomeSlideProps) => {
   return (
     <View style={[styles.container, {width}]}>
       <View style={styles.imageContainer}>
-        {item.order === 0 && <Slider1 />}
-        {item.order === 1 && <Slider2 />}
-        {item.order === 2 && <Slider3 />}
+        {item.id === '0' && <Slider1 />}
+        {item.id === '1' && <Slider2 />}
+        {item.id === '2' && <Slider3 />}
       </View>
       <Typography size="20" weight="bold" style={styles.textHeader}>
         {item.title}

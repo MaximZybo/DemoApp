@@ -4,7 +4,7 @@ import {Typography} from '@/Components/Typography';
 import {PressableOpacity} from './PressableOpacity';
 import {COLORS} from '@/Constants/Colors';
 
-export type ButtonProps = {
+type TButtonProps = {
   title: string;
   type?: 'primary' | 'secondary' | 'tertiary';
   disabled?: boolean;
@@ -18,7 +18,7 @@ export const Button = ({
   disabled = false,
   style,
   onPress,
-}: ButtonProps) => {
+}: TButtonProps) => {
   let buttonStyle;
   let typographyColor;
 
