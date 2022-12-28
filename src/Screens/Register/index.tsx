@@ -7,6 +7,7 @@ import {LAYOUTS} from '@/Constants/Layouts';
 import {VALIDATION} from '@/Constants/Validation';
 import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput} from '@/Components/Inputs/BaseInput';
+import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
 import {Typography} from '@/Components/Typography';
 
@@ -97,7 +98,7 @@ export const Register = () => {
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
-          <BaseInput
+          <PasswordInput
             label="Password"
             onChangeText={onChange}
             value={value}
@@ -109,7 +110,7 @@ export const Register = () => {
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
-          <BaseInput
+          <PasswordInput
             label="Confirm Password"
             onChangeText={onChange}
             value={value}

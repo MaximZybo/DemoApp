@@ -10,17 +10,35 @@ import {
   TextInputFocusEventData,
 } from 'react-native';
 import {FieldError} from 'react-hook-form';
+import {Eye, EyeCrossed} from '@/Assets/Svg';
 import {COLORS} from '@/Constants/Colors';
-import {Typography} from '@/Components/Typography';
+import {LAYOUTS} from '@/Constants/Layouts';
+import {Typography} from '../Typography';
+import {ConditionalWrapper} from '../ConditionalWrapper';
+import {PressableOpacity} from '../Buttons/PressableOpacity';
 
-type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
+const icons = {
+  eye: Eye,
+  eyeCrossed: EyeCrossed,
+};
+
+const HORIZONTAL_PADDING = 12;
+const ICON_MARGIN = 10;
+
+type TIcon = keyof typeof icons;
+
+export type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void; // Replace optional to required
+  icon?: TIcon;
+  onIconPress?: () => void;
   label?: string;
   error?: FieldError;
   style?: StyleProp<TextStyle>;
 };
 
 export const BaseInput = ({
+  icon,
+  onIconPress,
   label,
   error,
   style,
@@ -31,11 +49,17 @@ export const BaseInput = ({
 }: TBaseInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
+  let rightPadding = HORIZONTAL_PADDING;
+
+  if (icon) {
+    rightPadding = HORIZONTAL_PADDING + LAYOUTS.SVG_ICONS_SIZE + ICON_MARGIN;
+  }
+
   const baseInputStyles = StyleSheet.flatten([
-    stylesInput.baseContainer,
-    !!error && stylesInput.error,
+    styles.baseContainer,
+    !!error && styles.error,
     isFocused && {borderColor: COLORS.GREEN_500},
-    !editable && stylesInput.disabledInput,
+    !editable && styles.disabledInput,
   ]);
 
   const inputFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
@@ -54,6 +78,8 @@ export const BaseInput = ({
     </Typography>
   );
 
+  const renderIcon = () => (icon ? React.createElement(icons[icon], {}) : null);
+
   const renderBottomError = () => (
     <Typography size="12" color={COLORS.RED_300}>
       {error?.message || ' '}
@@ -61,18 +87,31 @@ export const BaseInput = ({
   );
 
   const renderBaseInput = () => (
-    <TextInput
-      style={[stylesInput.baseTextInput, style]}
-      placeholderTextColor={COLORS.GREY_300}
-      editable={editable}
-      onFocus={inputFocus}
-      onBlur={inputBlur}
-      {...restProps}
-    />
+    <>
+      <TextInput
+        style={[styles.baseTextInput, {paddingRight: rightPadding}, style]}
+        placeholderTextColor={COLORS.GREY_300}
+        editable={editable}
+        onFocus={inputFocus}
+        onBlur={inputBlur}
+        {...restProps}
+      />
+      <View style={styles.iconWrapper}>
+        <ConditionalWrapper
+          condition={!!onIconPress}
+          wrapper={(wrapperChildren: React.ReactNode) => (
+            <PressableOpacity onPress={onIconPress} hitSlop={10}>
+              <>{wrapperChildren}</>
+            </PressableOpacity>
+          )}>
+          {renderIcon()}
+        </ConditionalWrapper>
+      </View>
+    </>
   );
 
   return (
-    <View style={stylesInput.container}>
+    <View style={styles.container}>
       {!!label && renderLabel()}
       <View style={baseInputStyles}>{renderBaseInput()}</View>
       {renderBottomError()}
@@ -80,7 +119,7 @@ export const BaseInput = ({
   );
 };
 
-const stylesInput = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     marginBottom: 5,
   },
@@ -94,12 +133,19 @@ const stylesInput = StyleSheet.create({
   baseTextInput: {
     fontFamily: 'KumbhSans-regular',
     fontSize: 16,
-    paddingHorizontal: 12,
+    paddingLeft: HORIZONTAL_PADDING,
     height: 45,
     color: COLORS.GREY_800,
   },
   error: {
     borderColor: COLORS.RED_300,
+  },
+  iconWrapper: {
+    position: 'absolute',
+    right: HORIZONTAL_PADDING,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: '100%',
   },
   disabledInput: {
     backgroundColor: COLORS.GREY_100,
