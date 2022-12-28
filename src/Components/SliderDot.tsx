@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.GREEN_800,
   },
   inactive: {
-    height: 5,
-    width: 5,
-    borderRadius: 3,
+    height: 4,
+    width: 4,
+    borderRadius: 2,
     backgroundColor: COLORS.GREY_800,
   },
   leftMargin: {

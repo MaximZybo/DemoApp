@@ -9,13 +9,14 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
 } from 'react-native';
+import {FieldError} from 'react-hook-form';
 import {COLORS} from '@/Constants/Colors';
 import {Typography} from '@/Components/Typography';
 
 type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void; // Replace optional to required
   label?: string;
-  error?: string;
+  error?: FieldError;
   style?: StyleProp<TextStyle>;
 };
 
@@ -32,8 +33,8 @@ export const BaseInput = ({
 
   const baseInputStyles = StyleSheet.flatten([
     stylesInput.baseContainer,
-    isFocused && {borderColor: COLORS.GREEN_500},
     !!error && stylesInput.error,
+    isFocused && {borderColor: COLORS.GREEN_500},
     !editable && stylesInput.disabledInput,
   ]);
 
@@ -55,7 +56,7 @@ export const BaseInput = ({
 
   const renderBottomError = () => (
     <Typography size="12" color={COLORS.RED_300}>
-      {error || ' '}
+      {error?.message || ' '}
     </Typography>
   );
 

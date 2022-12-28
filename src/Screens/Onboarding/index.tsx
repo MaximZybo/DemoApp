@@ -117,10 +117,9 @@ export const Onboarding = ({
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 0,
-    paddingTop: 30,
   },
   buttonsContainer: {
-    marginTop: 30,
+    marginTop: LAYOUTS.PADDING,
     paddingHorizontal: LAYOUTS.PADDING,
   },
   paginationContainer: {
