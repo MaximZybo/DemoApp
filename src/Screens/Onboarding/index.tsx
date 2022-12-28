@@ -70,7 +70,7 @@ export const Onboarding = ({
     <WelcomeSlide item={item} />
   );
 
-  const signInPress = () => {
+  const loginPress = () => {
     navigation.navigate('Login');
   };
 
@@ -107,7 +107,7 @@ export const Onboarding = ({
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <Button title="Sign In" onPress={signInPress} />
+        <Button title="Login" onPress={loginPress} />
         <Button title="Register" type="secondary" onPress={registerPress} />
       </View>
     </AppScreen>
