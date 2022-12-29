@@ -8,9 +8,10 @@ import {
   StyleSheet,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  ColorValue,
 } from 'react-native';
 import {FieldError} from 'react-hook-form';
-import {Eye, EyeCrossed} from '@/Assets/Svg';
+import {Check, Attention, Eye, EyeCrossed} from '@/Assets/Svg';
 import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {Typography} from '../Typography';
@@ -20,16 +21,19 @@ import {PressableOpacity} from '../Buttons/PressableOpacity';
 const icons = {
   eye: Eye,
   eyeCrossed: EyeCrossed,
+  check: Check,
+  attention: Attention,
 };
 
 const HORIZONTAL_PADDING = 12;
 const ICON_MARGIN = 10;
 
-type TIcon = keyof typeof icons;
+export type TIcon = keyof typeof icons;
 
 export type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void; // Replace optional to required
   icon?: TIcon;
+  iconColor?: ColorValue;
   onIconPress?: () => void;
   label?: string;
   error?: FieldError;
@@ -38,6 +42,7 @@ export type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
 
 export const BaseInput = ({
   icon,
+  iconColor = COLORS.ICON_DEFAULT,
   onIconPress,
   label,
   error,
@@ -78,7 +83,8 @@ export const BaseInput = ({
     </Typography>
   );
 
-  const renderIcon = () => (icon ? React.createElement(icons[icon], {}) : null);
+  const renderIcon = () =>
+    icon ? React.createElement(icons[icon], {color: iconColor}) : null;
 
   const renderBottomError = () => (
     <Typography size="12" color={COLORS.RED_300}>

@@ -4,3 +4,5 @@ export {default as Slider3} from './slider3.svg';
 export {default as AndleLeft} from './angle-left.svg';
 export {default as Eye} from './eye.svg';
 export {default as EyeCrossed} from './eye-crossed.svg';
+export {default as Attention} from './attention.svg';
+export {default as Check} from './check.svg';

@@ -1,8 +1,11 @@
 import {string, ref} from 'yup';
 
+export const MIN_NICKNAME_LENGTH = 6;
+
 export const VALIDATION = {
   stringRequired: string().required(''),
   stringOptional: string().optional(),
+  nickName: string().required('').min(MIN_NICKNAME_LENGTH, 'Min length is 6'),
   email: string().required('').email('Not a valid email'),
   passwordSetup: string()
     .required('')

@@ -1,17 +1,25 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputEndEditingEventData,
+} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {object, SchemaOf} from 'yup';
+import {boolean, object, SchemaOf} from 'yup';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {VALIDATION} from '@/Constants/Validation';
+import {VALIDATION, MIN_NICKNAME_LENGTH} from '@/Constants/Validation';
 import {AppScreen} from '@/Components/AppScreen';
-import {BaseInput} from '@/Components/Inputs/BaseInput';
+import {BaseInput, TBaseInputProps} from '@/Components/Inputs/BaseInput';
 import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
 import {Typography} from '@/Components/Typography';
+import {COLORS} from '@/Constants/Colors';
 
 type TFormData = {
+  isNickChecked: boolean;
+  isNickValidated: boolean;
+  nickName: string;
   firstName: string;
   lastName: string;
   middleName?: string;
@@ -21,6 +29,16 @@ type TFormData = {
 };
 
 const schema: SchemaOf<TFormData> = object({
+  isNickChecked: boolean().required(),
+  isNickValidated: boolean().required(),
+  nickName: VALIDATION.nickName.test(
+    'balanceAmount',
+    'This nickname already exists',
+    (value, context) =>
+      value &&
+      value?.length >= MIN_NICKNAME_LENGTH &&
+      (context.parent.isNickValidated || !context.parent.isNickChecked),
+  ),
   firstName: VALIDATION.stringRequired,
   lastName: VALIDATION.stringRequired,
   middleName: VALIDATION.stringOptional,
@@ -34,13 +52,58 @@ export const Register = () => {
     control,
     handleSubmit,
     formState: {errors},
+    trigger,
+    setValue,
+    watch,
   } = useForm<TFormData>({
     resolver: yupResolver(schema),
   });
+
+  const {isNickChecked, isNickValidated} = watch();
+
+  const nickOnEndEditing = ({
+    nativeEvent: {text: nickName},
+  }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
+    if (nickName.length >= MIN_NICKNAME_LENGTH && !isNickChecked) {
+      setValue('isNickChecked', true);
+      setValue('isNickValidated', nickName === 'testing');
+    }
+    trigger('nickName');
+  };
+
+  const nickOnChange = () => {
+    setValue('isNickChecked', false);
+    setValue('isNickValidated', false);
+    trigger('nickName');
+  };
+
+  const getNickIcon = (): Partial<TBaseInputProps> | undefined => {
+    if (isNickChecked && isNickValidated) {
+      return {icon: 'check', iconColor: COLORS.GREEN_500};
+    }
+    if (isNickChecked && !isNickValidated) {
+      return {icon: 'attention', iconColor: COLORS.RED_300};
+    }
+  };
   const onSubmit = (data: any) => console.log(data);
 
   return (
     <AppScreen>
+      <Controller
+        control={control}
+        render={({field: {onChange, value}}) => (
+          <BaseInput
+            label="Nickname"
+            onChangeText={onChange}
+            onChange={nickOnChange}
+            onEndEditing={nickOnEndEditing}
+            value={value}
+            error={errors.nickName}
+            {...getNickIcon()}
+          />
+        )}
+        name="nickName"
+      />
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (

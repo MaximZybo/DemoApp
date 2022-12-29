@@ -26,7 +26,7 @@ export const Header = ({
             hitSlop={5}
             onPress={navigation.goBack}
             style={styles.backButton}>
-            <AndleLeft />
+            <AndleLeft color={COLORS.ICON_DEFAULT} />
           </PressableOpacity>
         )}
         <Typography size="16" weight="semibold" style={styles.title}>
