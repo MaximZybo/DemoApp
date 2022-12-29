@@ -5,13 +5,14 @@ import {PopUpModal} from '@/Screens/Modals/PopUpModal';
 import {LoaderModal} from '@/Screens/Modals/LoaderModal';
 import {BeforeAuthStackNavigator} from './BeforeAuthStackNavigator';
 import {AfterAuthStackNavigator} from './AfterAuthStackNavigator';
+import {navigationRef} from './Root';
 import {RootStackParamList} from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootStackNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="BeforeAuth" component={BeforeAuthStackNavigator} />
         <Stack.Screen name="AfterAuth" component={AfterAuthStackNavigator} />

@@ -15,8 +15,8 @@ import {BaseInput, TBaseInputProps} from '@/Components/Inputs/BaseInput';
 import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
 import {Typography} from '@/Components/Typography';
-import {wait} from '@/Utils/dev';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
+import {emulateRequest} from '@/Utils/dev';
 
 type TFormData = {
   isNickChecked: boolean;
@@ -49,9 +49,7 @@ const schema: SchemaOf<TFormData> = object({
   passwordConfirm: VALIDATION.passwordConfirm,
 });
 
-export const Register = ({
-  navigation,
-}: BeforeAuthStackScreenProps<'Onboarding'>) => {
+export const Register = ({}: BeforeAuthStackScreenProps<'Register'>) => {
   const {
     control,
     handleSubmit,
@@ -65,20 +63,18 @@ export const Register = ({
 
   const {isNickChecked, isNickValidated} = watch();
 
-  const nickOnEndEditing = async ({
+  const nickOnEndEditing = ({
     nativeEvent: {text: nickName},
   }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
     if (nickName.length >= MIN_NICKNAME_LENGTH && !isNickChecked) {
-      // emulating request
-      navigation.navigate('LoadingModal');
-      await wait(2000);
-      navigation.getParent()?.goBack();
-      //
-
-      setValue('isNickChecked', true);
-      setValue('isNickValidated', nickName === 'testing');
+      emulateRequest(1500, nickName === 'testing')
+        .then(() => setValue('isNickValidated', true))
+        .catch(() => {})
+        .finally(() => {
+          setValue('isNickChecked', true);
+          trigger('nickName');
+        });
     }
-    trigger('nickName');
   };
 
   const nickOnChange = () => {
