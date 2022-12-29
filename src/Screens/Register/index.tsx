@@ -9,12 +9,14 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {boolean, object, SchemaOf} from 'yup';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {VALIDATION, MIN_NICKNAME_LENGTH} from '@/Constants/Validation';
+import {COLORS} from '@/Constants/Colors';
 import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput, TBaseInputProps} from '@/Components/Inputs/BaseInput';
 import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
 import {Typography} from '@/Components/Typography';
-import {COLORS} from '@/Constants/Colors';
+import {wait} from '@/Utils/dev';
+import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 
 type TFormData = {
   isNickChecked: boolean;
@@ -47,7 +49,9 @@ const schema: SchemaOf<TFormData> = object({
   passwordConfirm: VALIDATION.passwordConfirm,
 });
 
-export const Register = () => {
+export const Register = ({
+  navigation,
+}: BeforeAuthStackScreenProps<'Onboarding'>) => {
   const {
     control,
     handleSubmit,
@@ -61,10 +65,16 @@ export const Register = () => {
 
   const {isNickChecked, isNickValidated} = watch();
 
-  const nickOnEndEditing = ({
+  const nickOnEndEditing = async ({
     nativeEvent: {text: nickName},
   }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
     if (nickName.length >= MIN_NICKNAME_LENGTH && !isNickChecked) {
+      // emulating request
+      navigation.navigate('LoadingModal');
+      await wait(2000);
+      navigation.getParent()?.goBack();
+      //
+
       setValue('isNickChecked', true);
       setValue('isNickValidated', nickName === 'testing');
     }

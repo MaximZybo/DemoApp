@@ -3,6 +3,7 @@ export const COLORS = {
   WHITE: '#ffffff',
   BLACK: '#000000',
   ICON_DEFAULT: '#000906',
+  MODAL_BACKGROUND: 'rgba(0, 0, 0, 0.5)',
   GREY_900: '#1C2220',
   GREY_800: '#293230',
   GREY_700: '#3E4C48',
