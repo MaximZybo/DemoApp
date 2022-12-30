@@ -8,7 +8,13 @@ import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 export type RootStackParamList = {
   BeforeAuth: NavigatorScreenParams<BeforeAuthStackParamList>;
   AfterAuth: NavigatorScreenParams<AfterAuthParamList>;
-  PopUpModal: undefined;
+  PopUpModal: {
+    title: string;
+    primaryTitle?: string;
+    onPrimaryPress?: () => void;
+    secondaryTitle?: string;
+    onSecondaryPress?: () => void;
+  };
   LoadingModal: undefined;
 };
 
@@ -18,7 +24,7 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 export type BeforeAuthStackParamList = {
   Onboarding: undefined;
   Register: undefined;
-  Login: undefined;
+  Login: {login: string} | undefined;
 };
 
 export type BeforeAuthStackScreenProps<

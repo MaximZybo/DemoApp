@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import {Typography} from '@/Components/Typography';
-import {PressableOpacity} from './PressableOpacity';
 import {COLORS} from '@/Constants/Colors';
+import {LAYOUTS} from '@/Constants/Layouts';
+import {PressableOpacity} from './PressableOpacity';
 
 type TButtonProps = {
   title: string;
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     alignItems: 'center',
     borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: LAYOUTS.PADDING,
   },
   primaryButton: {
     backgroundColor: COLORS.BLACK,
@@ -97,5 +98,6 @@ const styles = StyleSheet.create({
   },
   tertiaryButton: {
     borderColor: COLORS.TRANSPARENT,
+    alignSelf: 'center',
   },
 });

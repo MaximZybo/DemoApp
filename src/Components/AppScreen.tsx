@@ -7,7 +7,7 @@ import {LAYOUTS} from '@/Constants/Layouts';
 import {ConditionalWrapper} from './ConditionalWrapper';
 
 type TAppScreenProps = {
-  children: React.ReactNode;
+  children: React.ReactNode[] | React.ReactNode;
   isScroll?: boolean;
   topPadding?: boolean;
   bottomPadding?: boolean;

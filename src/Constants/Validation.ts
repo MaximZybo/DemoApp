@@ -1,15 +1,21 @@
 import {string, ref} from 'yup';
 
-export const MIN_NICKNAME_LENGTH = 6;
+export const NICKNAME_MIN_LENGTH = 6;
+const PASSWORD_MIN_LENGTH = 6;
 
 export const VALIDATION = {
   stringRequired: string().required(''),
   stringOptional: string().optional(),
-  nickName: string().required('').min(MIN_NICKNAME_LENGTH, 'Min length is 6'),
+  nickName: string()
+    .required('')
+    .min(NICKNAME_MIN_LENGTH, `Min length is ${NICKNAME_MIN_LENGTH}`),
   email: string().required('').email('Not a valid email'),
+  password: string()
+    .required('')
+    .min(PASSWORD_MIN_LENGTH, `Min length is ${PASSWORD_MIN_LENGTH}`),
   passwordSetup: string()
     .required('')
-    .min(6, 'Min length is 6')
+    .min(PASSWORD_MIN_LENGTH, `Min length is ${PASSWORD_MIN_LENGTH}`)
     .matches(
       /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$)/,
       'Does not match requirements',

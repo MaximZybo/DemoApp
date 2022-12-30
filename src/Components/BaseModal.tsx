@@ -13,7 +13,6 @@ import {PressableOpacity} from './Buttons/PressableOpacity';
 type BaseModalProps = {
   allowCloseModal?: boolean;
   children: React.ReactNode[] | React.ReactNode;
-  backgroundPress?: () => void;
   overlayStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
 };
@@ -21,7 +20,6 @@ type BaseModalProps = {
 export const BaseModal = ({
   allowCloseModal = false,
   children,
-  backgroundPress,
   overlayStyle,
   containerStyle,
 }: BaseModalProps) => {
@@ -46,11 +44,7 @@ export const BaseModal = ({
 
   const onBackgroundPress = () => {
     if (allowCloseModal) {
-      if (backgroundPress) {
-        backgroundPress();
-      } else {
-        navigation.goBack();
-      }
+      navigation.goBack();
     }
   };
   return (
@@ -58,7 +52,9 @@ export const BaseModal = ({
       style={[styles.baseModalOverlay, overlayStyle]}
       onPress={onBackgroundPress}
       activeOpacity={1}>
-      <View style={containerStyle}>{children}</View>
+      <View onStartShouldSetResponder={() => true} style={containerStyle}>
+        {children}
+      </View>
     </PressableOpacity>
   );
 };

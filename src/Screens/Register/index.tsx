@@ -8,7 +8,7 @@ import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {boolean, object, SchemaOf} from 'yup';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {VALIDATION, MIN_NICKNAME_LENGTH} from '@/Constants/Validation';
+import {VALIDATION, NICKNAME_MIN_LENGTH} from '@/Constants/Validation';
 import {COLORS} from '@/Constants/Colors';
 import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput, TBaseInputProps} from '@/Components/Inputs/BaseInput';
@@ -38,7 +38,7 @@ const schema: SchemaOf<TFormData> = object({
     'This nickname already exists',
     (value, context) =>
       value &&
-      value?.length >= MIN_NICKNAME_LENGTH &&
+      value?.length >= NICKNAME_MIN_LENGTH &&
       (context.parent.isNickValidated || !context.parent.isNickChecked),
   ),
   firstName: VALIDATION.stringRequired,
@@ -49,7 +49,9 @@ const schema: SchemaOf<TFormData> = object({
   passwordConfirm: VALIDATION.passwordConfirm,
 });
 
-export const Register = ({}: BeforeAuthStackScreenProps<'Register'>) => {
+export const Register = ({
+  navigation,
+}: BeforeAuthStackScreenProps<'Register'>) => {
   const {
     control,
     handleSubmit,
@@ -58,15 +60,14 @@ export const Register = ({}: BeforeAuthStackScreenProps<'Register'>) => {
     setValue,
     watch,
   } = useForm<TFormData>({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
-
   const {isNickChecked, isNickValidated} = watch();
 
   const nickOnEndEditing = ({
     nativeEvent: {text: nickName},
   }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
-    if (nickName.length >= MIN_NICKNAME_LENGTH && !isNickChecked) {
+    if (nickName.length >= NICKNAME_MIN_LENGTH && !isNickChecked) {
       emulateRequest(1500, nickName === 'testing')
         .then(() => setValue('isNickValidated', true))
         .catch(() => {})
@@ -91,7 +92,18 @@ export const Register = ({}: BeforeAuthStackScreenProps<'Register'>) => {
       return {icon: 'attention', iconColor: COLORS.RED_300};
     }
   };
-  const onSubmit = (data: any) => console.log(data);
+
+  const onSubmit = (formData: TFormData) => {
+    navigation.reset({
+      index: 1,
+      routes: [
+        {name: 'Onboarding'},
+        {name: 'Login', params: {login: formData.nickName}},
+      ],
+    });
+
+    navigation.navigate('PopUpModal', {title: 'Registration completed'});
+  };
 
   return (
     <AppScreen>
@@ -189,7 +201,7 @@ export const Register = ({}: BeforeAuthStackScreenProps<'Register'>) => {
         name="passwordConfirm"
       />
       <Button
-        title="Submit"
+        title="Register"
         onPress={handleSubmit(onSubmit)}
         style={styles.button}
       />
