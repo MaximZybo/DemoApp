@@ -16,19 +16,17 @@ type TWelcomeSlideProps = {
 };
 
 export const WelcomeSlide = ({item}: TWelcomeSlideProps) => {
-  const {width} = useWindowDimensions();
+  const {width: screenWidth} = useWindowDimensions();
   const {left, right} = useSafeAreaInsets();
+
+  const slideWidth = Math.round(screenWidth - left - right);
 
   return (
     <View
       style={[
         styles.container,
         {
-          width,
-          borderWidth: 1,
-          borderColor: 'red',
-          // paddingLeft: left + LAYOUTS.PADDING,
-          // paddingRight: right + LAYOUTS.PADDING,
+          width: slideWidth,
         },
       ]}>
       <View style={styles.imageContainer}>
@@ -53,10 +51,11 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     textAlign: 'center',
-    marginVertical: 20,
+    marginVertical: LAYOUTS.PADDING,
   },
   textContent: {
     textAlign: 'center',
+    flex: 1,
   },
   imageContainer: {
     justifyContent: 'center',

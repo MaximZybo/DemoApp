@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    borderWidth: 1,
     padding: LAYOUTS.PADDING,
   },
 });
