@@ -68,7 +68,7 @@ export const Register = ({
     nativeEvent: {text: nickName},
   }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
     if (nickName.length >= NICKNAME_MIN_LENGTH && !isNickChecked) {
-      emulateRequest(1500, nickName === 'testing')
+      emulateRequest(1500, nickName === 'Testing')
         .then(() => setValue('isNickValidated', true))
         .catch(() => {})
         .finally(() => {

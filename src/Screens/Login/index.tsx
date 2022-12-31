@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {object, SchemaOf} from 'yup';
 import {useAppDispatch} from '@/Hooks/redux';
 import {setIsSignedIn} from '@/Store/Profile/profileSlice';
+import {getCredentials, setCredentials} from '@/Utils/Storage/authStorage';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {VALIDATION} from '@/Constants/Validation';
 import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput} from '@/Components/Inputs/BaseInput';
+import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 import {emulateRequest} from '@/Utils/dev';
@@ -34,15 +36,30 @@ export const Login = ({
   const {
     control,
     handleSubmit,
+    setValue,
     formState: {errors},
   } = useForm<TFormData>({
     resolver: yupResolver(schema),
     defaultValues: {login: initialLogin},
   });
 
+  useEffect(() => {
+    getCredentials()
+      .then(credentials => {
+        if (credentials) {
+          setValue('login', credentials.userId);
+        }
+      })
+      .catch(() => {
+        // send error report
+      });
+  }, [setValue]);
+
   const onSubmit = (data: TFormData) => {
-    emulateRequest(1000, data.login === 'testing')
+    emulateRequest(1000, data.login === 'Testing')
       .then(() => {
+        setCredentials({userId: data.login, password: data.password});
+
         dispatch(setIsSignedIn());
       })
       .catch(() => {
@@ -67,7 +84,7 @@ export const Login = ({
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
-          <BaseInput
+          <PasswordInput
             label="Password"
             onChangeText={onChange}
             value={value}

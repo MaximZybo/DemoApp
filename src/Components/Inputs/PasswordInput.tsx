@@ -10,10 +10,10 @@ export const PasswordInput = ({...restProps}: TBaseInputProps) => {
 
   return (
     <BaseInput
-      {...restProps}
       icon={isVisible ? 'eye' : 'eyeCrossed'}
       secureTextEntry={!isVisible}
       onIconPress={onIconPress}
+      {...restProps}
     />
   );
 };
