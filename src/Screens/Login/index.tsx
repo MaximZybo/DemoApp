@@ -9,7 +9,6 @@ import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput} from '@/Components/Inputs/BaseInput';
 import {Button} from '@/Components/Buttons/Button';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
-import {emulateRequest} from '@/Utils/dev';
 
 type TFormData = {
   login: string;
@@ -38,7 +37,7 @@ export const Login = ({route}: BeforeAuthStackScreenProps<'Login'>) => {
   };
 
   return (
-    <AppScreen>
+    <AppScreen headerTitle="Login">
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (

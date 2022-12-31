@@ -79,9 +79,7 @@ export const Onboarding = ({
   };
 
   return (
-    <AppScreen
-      edges={['top', 'bottom']}
-      contentContainerStyle={styles.container}>
+    <AppScreen contentContainerStyle={styles.container}>
       <StatusBar
         translucent
         backgroundColor={COLORS.TRANSPARENT}

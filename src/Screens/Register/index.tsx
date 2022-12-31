@@ -106,7 +106,7 @@ export const Register = ({
   };
 
   return (
-    <AppScreen>
+    <AppScreen headerTitle="Register">
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (

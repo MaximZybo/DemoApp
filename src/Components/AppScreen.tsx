@@ -1,72 +1,88 @@
 import React from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import {Edge, SafeAreaView} from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {ConditionalWrapper} from './ConditionalWrapper';
+import {Header} from './Header';
 
 type TAppScreenProps = {
   children: React.ReactNode[] | React.ReactNode;
+  headerTitle?: string;
   isScroll?: boolean;
-  topPadding?: boolean;
-  bottomPadding?: boolean;
   style?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
-  edges?: Edge[];
 };
 
 export const AppScreen = ({
   children,
+  headerTitle,
   isScroll = true,
-  topPadding = true,
-  bottomPadding = true,
   style,
   contentContainerStyle,
-  edges = ['right', 'left', 'bottom'],
 }: TAppScreenProps) => {
+  const {top, bottom, left, right} = useSafeAreaInsets();
+  const paddingTop = Math.round(top);
+  const paddingBottom = Math.round(bottom);
+  const paddingLeft = Math.round(left);
+  const paddingRight = Math.round(right);
+
+  const safeAreaVerticalStyle = StyleSheet.flatten([
+    styles.safeAreaContainer,
+    !headerTitle && {paddingTop},
+    {paddingBottom},
+    style,
+  ]);
+
   return (
-    <SafeAreaView edges={edges} style={[styles.container, style]}>
+    <View style={safeAreaVerticalStyle}>
+      {!!headerTitle && (
+        <Header
+          title={headerTitle}
+          paddingTop={paddingTop}
+          paddingLeft={paddingLeft}
+          paddingRight={paddingRight}
+        />
+      )}
       <ConditionalWrapper
         condition={isScroll}
         wrapper={(wrapperChildren: React.ReactNode) => (
           <KeyboardAwareScrollView
             showsVerticalScrollIndicator={false}
             enableOnAndroid
-            contentContainerStyle={styles.keyboardAware}>
+            style={styles.scroll}
+            contentContainerStyle={styles.scrollContainer}>
             <>{wrapperChildren}</>
           </KeyboardAwareScrollView>
         )}>
-        <View
-          style={[
-            styles.contentContainer,
-            topPadding && styles.topPadding,
-            bottomPadding && styles.bottomPadding,
-            contentContainerStyle,
-          ]}>
-          {children}
+        <View style={[styles.safeAreaHorizontal, {paddingLeft, paddingRight}]}>
+          <View style={[styles.contentContainer, contentContainerStyle]}>
+            {children}
+          </View>
         </View>
       </ConditionalWrapper>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeAreaContainer: {
     backgroundColor: COLORS.WHITE,
-    flexGrow: 1,
+    flex: 1,
   },
-  keyboardAware: {
+  safeAreaHorizontal: {
+    flex: 1,
+  },
+  scroll: {
+    flex: 1,
+  },
+  scrollContainer: {
     flexGrow: 1,
   },
   contentContainer: {
-    flexGrow: 1,
-    paddingHorizontal: LAYOUTS.PADDING,
-  },
-  topPadding: {
-    paddingTop: LAYOUTS.PADDING,
-  },
-  bottomPadding: {
-    paddingBottom: LAYOUTS.PADDING,
+    flex: 1,
+    borderWidth: 1,
+    padding: LAYOUTS.PADDING,
   },
 });

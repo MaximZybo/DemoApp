@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, StyleSheet, useWindowDimensions} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {LAYOUTS} from '@/Constants/Layouts';
 import {Slider1, Slider2, Slider3} from '@/Assets/Svg';
 import {Typography} from '@/Components/Typography';
-import {LAYOUTS} from '@/Constants/Layouts';
 
 export type TSlide = {
   id: string;
@@ -16,9 +17,20 @@ type TWelcomeSlideProps = {
 
 export const WelcomeSlide = ({item}: TWelcomeSlideProps) => {
   const {width} = useWindowDimensions();
+  const {left, right} = useSafeAreaInsets();
 
   return (
-    <View style={[styles.container, {width}]}>
+    <View
+      style={[
+        styles.container,
+        {
+          width,
+          borderWidth: 1,
+          borderColor: 'red',
+          // paddingLeft: left + LAYOUTS.PADDING,
+          // paddingRight: right + LAYOUTS.PADDING,
+        },
+      ]}>
       <View style={styles.imageContainer}>
         {item.id === '0' && <Slider1 />}
         {item.id === '1' && <Slider2 />}
