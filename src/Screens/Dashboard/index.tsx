@@ -1,10 +1,16 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text, Button} from 'react-native';
+import {useAppDispatch} from '@/Hooks/redux';
+import {setIsSignedOut} from '@/Store/Profile/profileSlice';
+import {AppScreen} from '@/Components/AppScreen';
 
 export const Dashboard = () => {
+  const dispatch = useAppDispatch();
+
   return (
-    <View>
+    <AppScreen>
       <Text>Dashboard</Text>
-    </View>
+      <Button title="Sign Out" onPress={() => dispatch(setIsSignedOut())} />
+    </AppScreen>
   );
 };

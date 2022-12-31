@@ -3,12 +3,15 @@ import {StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {object, SchemaOf} from 'yup';
+import {useAppDispatch} from '@/Hooks/redux';
+import {setIsSignedIn} from '@/Store/Profile/profileSlice';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {VALIDATION} from '@/Constants/Validation';
 import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput} from '@/Components/Inputs/BaseInput';
 import {Button} from '@/Components/Buttons/Button';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
+import {emulateRequest} from '@/Utils/dev';
 
 type TFormData = {
   login: string;
@@ -20,8 +23,13 @@ const schema: SchemaOf<TFormData> = object({
   password: VALIDATION.password,
 });
 
-export const Login = ({route}: BeforeAuthStackScreenProps<'Login'>) => {
+export const Login = ({
+  navigation,
+  route,
+}: BeforeAuthStackScreenProps<'Login'>) => {
   const initialLogin = route.params?.login;
+
+  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -33,7 +41,13 @@ export const Login = ({route}: BeforeAuthStackScreenProps<'Login'>) => {
   });
 
   const onSubmit = (data: TFormData) => {
-    console.log(data);
+    emulateRequest(1000, data.login === 'testing')
+      .then(() => {
+        dispatch(setIsSignedIn());
+      })
+      .catch(() => {
+        navigation.navigate('PopUpModal', {title: 'Incorrect login'});
+      });
   };
 
   return (

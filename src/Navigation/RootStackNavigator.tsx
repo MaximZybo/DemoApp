@@ -1,6 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {useAppSelector} from '@/Hooks/redux';
+import {getIsSignedIn} from '@/Store/Profile/selectors';
 import {PopUpModal} from '@/Screens/Modals/PopUpModal';
 import {LoaderModal} from '@/Screens/Modals/LoaderModal';
 import {BeforeAuthStackNavigator} from './BeforeAuthStackNavigator';
@@ -11,11 +13,19 @@ import {RootStackParamList} from './types';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootStackNavigator = () => {
+  const isSignedIn = useAppSelector(getIsSignedIn);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="BeforeAuth" component={BeforeAuthStackNavigator} />
-        <Stack.Screen name="AfterAuth" component={AfterAuthStackNavigator} />
+        {isSignedIn ? (
+          <Stack.Screen name="AfterAuth" component={AfterAuthStackNavigator} />
+        ) : (
+          <Stack.Screen
+            name="BeforeAuth"
+            component={BeforeAuthStackNavigator}
+          />
+        )}
         <Stack.Group
           screenOptions={{
             animation: 'fade',

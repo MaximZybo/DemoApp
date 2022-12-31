@@ -60,7 +60,7 @@ export const Register = ({
     setValue,
     watch,
   } = useForm<TFormData>({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
   });
   const {isNickChecked, isNickValidated} = watch();
 
