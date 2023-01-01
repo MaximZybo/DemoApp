@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: COLORS.WHITE,
     flex: 1,
-    borderWidth: 1,
   },
   safeAreaHorizontal: {
     flex: 1,
@@ -90,7 +89,5 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: LAYOUTS.PADDING,
-    borderWidth: 1,
-    borderColor: 'red',
   },
 });

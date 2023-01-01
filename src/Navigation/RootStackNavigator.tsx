@@ -36,7 +36,10 @@ export const RootStackNavigator = () => {
         <Stack.Group
           screenOptions={{
             animation: 'fade',
-            presentation: 'transparentModal',
+            // presentation should be "containedTransparentModal", as "transparentModal"
+            // does not correctly calculate SafeAreaView on IOS rotation
+            // Bug is created https://github.com/react-navigation/react-navigation/issues/11132
+            presentation: 'containedTransparentModal',
             gestureEnabled: false,
           }}>
           <Stack.Screen name="PopUpModal" component={PopUpModal} />
