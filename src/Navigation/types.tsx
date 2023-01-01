@@ -40,7 +40,7 @@ export type AfterAuthParamList = {
   MoreStack: NavigatorScreenParams<MoreStackParamList>;
 };
 
-export type TabScreenProps<T extends keyof AfterAuthParamList> =
+export type AfterAuthScreenProps<T extends keyof AfterAuthParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<AfterAuthParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>

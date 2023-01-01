@@ -8,7 +8,7 @@ import {getIsSignedIn} from '@/Store/Profile/selectors';
 import {PopUpModal} from '@/Screens/Modals/PopUpModal';
 import {LoaderModal} from '@/Screens/Modals/LoaderModal';
 import {BeforeAuthStackNavigator} from './BeforeAuthStackNavigator';
-import {AfterAuthStackNavigator} from './AfterAuthStackNavigator';
+import {AfterAuthTabNavigator} from './AfterAuthTabNavigator';
 import {navigationRef} from './Root';
 import {RootStackParamList} from './types';
 
@@ -26,7 +26,7 @@ export const RootStackNavigator = () => {
       />
       <Stack.Navigator screenOptions={{headerShown: false}}>
         {isSignedIn ? (
-          <Stack.Screen name="AfterAuth" component={AfterAuthStackNavigator} />
+          <Stack.Screen name="AfterAuth" component={AfterAuthTabNavigator} />
         ) : (
           <Stack.Screen
             name="BeforeAuth"

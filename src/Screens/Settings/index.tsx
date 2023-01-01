@@ -1,12 +1,16 @@
 import React from 'react';
-import {Button, Text} from 'react-native';
 import {AppScreen} from '@/Components/AppScreen';
+import {MenuItem} from '@/Components/MenuItem';
+import {MoreStackScreenProps} from '@/Navigation/types';
 
-export const Settings = ({navigation}) => {
+export const Settings = ({navigation}: MoreStackScreenProps<'Settings'>) => {
   return (
     <AppScreen>
-      <Text>Settings</Text>
-      <Button
+      <MenuItem
+        title="Contact Us"
+        onPress={() => navigation.navigate('ContactUs')}
+      />
+      <MenuItem
         title="Contact Us"
         onPress={() => navigation.navigate('ContactUs')}
       />

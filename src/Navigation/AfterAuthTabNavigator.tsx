@@ -1,15 +1,16 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {COLORS} from '@/Constants/Colors';
 import {Bank, CreditCard, MeatballMenu} from '@/Assets/Svg';
 import {HomeStackNavigator} from './HomeStackNavigator';
 import {BillsStackNavigator} from './BillsStackNavigator';
 import {MoreStackNavigator} from './MoreStackNavigator';
 import {AfterAuthParamList} from './types';
-import {COLORS} from '@/Constants/Colors';
 
 const Tab = createBottomTabNavigator<AfterAuthParamList>();
 
-export const AfterAuthStackNavigator = () => {
+export const AfterAuthTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -17,6 +18,7 @@ export const AfterAuthStackNavigator = () => {
         tabBarShowLabel: false,
         tabBarActiveTintColor: COLORS.GREEN_800,
         tabBarInactiveTintColor: COLORS.GREY_800,
+        tabBarStyle: styles.tabBar,
       }}>
       <Tab.Screen
         name="HomeStack"
@@ -36,3 +38,9 @@ export const AfterAuthStackNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  tabBar: {
+    borderTopColor: COLORS.GREY_800,
+  },
+});
