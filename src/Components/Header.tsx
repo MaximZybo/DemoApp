@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {COLORS} from '@/Constants/Colors';
-import {AndleLeft} from '@/Assets/Svg';
+import {AngleLeft} from '@/Assets/Svg';
 import {PressableOpacity} from './Buttons/PressableOpacity';
 import {Typography} from './Typography';
 
@@ -37,7 +37,7 @@ export const Header = ({
           hitSlop={5}
           onPress={navigation.goBack}
           style={styles.backButton}>
-          <AndleLeft color={COLORS.ICON_DEFAULT} />
+          <AngleLeft color={COLORS.ICON_DEFAULT} />
         </PressableOpacity>
         <Typography size="16" weight="semibold" style={styles.title}>
           {title}

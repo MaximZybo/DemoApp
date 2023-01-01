@@ -1,6 +1,8 @@
 import React from 'react';
+import {StatusBar} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {COLORS} from '@/Constants/Colors';
 import {useAppSelector} from '@/Hooks/redux';
 import {getIsSignedIn} from '@/Store/Profile/selectors';
 import {PopUpModal} from '@/Screens/Modals/PopUpModal';
@@ -17,6 +19,11 @@ export const RootStackNavigator = () => {
 
   return (
     <NavigationContainer ref={navigationRef}>
+      <StatusBar
+        translucent
+        backgroundColor={COLORS.TRANSPARENT}
+        barStyle="dark-content"
+      />
       <Stack.Navigator screenOptions={{headerShown: false}}>
         {isSignedIn ? (
           <Stack.Screen name="AfterAuth" component={AfterAuthStackNavigator} />

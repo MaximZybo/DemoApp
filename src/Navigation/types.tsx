@@ -36,6 +36,7 @@ export type BeforeAuthStackScreenProps<
 
 export type AfterAuthParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
+  BillsStack: NavigatorScreenParams<BillsStackParamList>;
   MoreStack: NavigatorScreenParams<MoreStackParamList>;
 };
 
@@ -52,6 +53,16 @@ export type HomeStackParamList = {
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<HomeStackParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type BillsStackParamList = {
+  BillsManagement: undefined;
+};
+
+export type BillsStackScreenProps<T extends keyof BillsStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<BillsStackParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
 

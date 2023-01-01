@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
+import {AppScreen} from '@/Components/AppScreen';
 
 export const ContactUs = () => {
   return (
-    <View>
+    <AppScreen headerTitle="Contact Us">
       <Text>ContactUs</Text>
-    </View>
+    </AppScreen>
   );
 };

@@ -1,10 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Button, Text} from 'react-native';
+import {AppScreen} from '@/Components/AppScreen';
 
-export const Settings = () => {
+export const Settings = ({navigation}) => {
   return (
-    <View>
+    <AppScreen>
       <Text>Settings</Text>
-    </View>
+      <Button
+        title="Contact Us"
+        onPress={() => navigation.navigate('ContactUs')}
+      />
+    </AppScreen>
   );
 };

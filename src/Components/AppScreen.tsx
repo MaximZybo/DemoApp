@@ -6,6 +6,8 @@ import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {ConditionalWrapper} from './ConditionalWrapper';
 import {Header} from './Header';
+import {useAppSelector} from '@/Hooks/redux';
+import {getIsSignedIn} from '@/Store/Profile/selectors';
 
 type TAppScreenProps = {
   children: React.ReactNode[] | React.ReactNode;
@@ -22,7 +24,10 @@ export const AppScreen = ({
   style,
   contentContainerStyle,
 }: TAppScreenProps) => {
+  const isSignedIn = useAppSelector(getIsSignedIn);
+
   const {top, bottom, left, right} = useSafeAreaInsets();
+  console.log(top, bottom, left, right);
   const paddingTop = Math.round(top);
   const paddingBottom = Math.round(bottom);
   const paddingLeft = Math.round(left);
@@ -31,7 +36,8 @@ export const AppScreen = ({
   const safeAreaVerticalStyle = StyleSheet.flatten([
     styles.safeAreaContainer,
     !headerTitle && {paddingTop},
-    {paddingBottom},
+    // if user is signed in, tab bar will add bottom safeArea
+    !isSignedIn && {paddingBottom},
     style,
   ]);
 
@@ -70,6 +76,7 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: COLORS.WHITE,
     flex: 1,
+    borderWidth: 1,
   },
   safeAreaHorizontal: {
     flex: 1,
@@ -83,5 +90,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: LAYOUTS.PADDING,
+    borderWidth: 1,
+    borderColor: 'red',
   },
 });

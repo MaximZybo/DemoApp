@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {
-  StatusBar,
   View,
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -10,7 +9,6 @@ import {
   ListRenderItemInfo,
 } from 'react-native';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {COLORS} from '@/Constants/Colors';
 import {AppScreen} from '@/Components/AppScreen';
 import {WelcomeSlide, TSlide} from '@/Components/WelcomeSlide';
 import {SliderDot} from '@/Components/SliderDot';
@@ -80,11 +78,6 @@ export const Onboarding = ({
 
   return (
     <AppScreen contentContainerStyle={styles.container}>
-      <StatusBar
-        translucent
-        backgroundColor={COLORS.TRANSPARENT}
-        barStyle="dark-content"
-      />
       <View>
         <FlatList
           ref={listRef}
