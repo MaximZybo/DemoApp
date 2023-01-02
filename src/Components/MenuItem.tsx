@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet, Platform, ColorValue} from 'react-native';
 import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {AngleRight} from '@/Assets/Svg';
@@ -9,12 +9,17 @@ import {Typography} from './Typography';
 type TMenuItemProps = {
   title: string;
   onPress: () => void;
+  fontColor?: ColorValue;
 };
 
-export const MenuItem = ({title, onPress}: TMenuItemProps) => {
+export const MenuItem = ({title, onPress, fontColor}: TMenuItemProps) => {
   return (
     <PressableOpacity hitSlop={5} onPress={onPress} style={styles.container}>
-      <Typography size="16" weight="semibold" style={styles.title}>
+      <Typography
+        color={fontColor}
+        size="16"
+        weight="semibold"
+        style={styles.title}>
         {title}
       </Typography>
       <AngleRight color={COLORS.GREEN_800} />

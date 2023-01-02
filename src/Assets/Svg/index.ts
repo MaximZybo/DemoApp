@@ -10,3 +10,5 @@ export {default as Check} from './check.svg';
 export {default as Bank} from './bank.svg';
 export {default as CreditCard} from './credit-card.svg';
 export {default as MeatballMenu} from './meatball-menu.svg';
+export {default as CaretLeft} from './caret-left.svg';
+export {default as CaretRight} from './caret-right.svg';

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {ProfileState} from './types';
+import {TProfileState} from './types';
 
-const initialState: ProfileState = {
+const initialState: TProfileState = {
   isSignedIn: false,
 };
 

@@ -1,9 +1,14 @@
 import React from 'react';
+import {COLORS} from '@/Constants/Colors';
+import {useAppDispatch} from '@/Hooks/redux';
+import {setIsSignedOut} from '@/Store/Profile/profileSlice';
 import {AppScreen} from '@/Components/AppScreen';
 import {MenuItem} from '@/Components/MenuItem';
 import {MoreStackScreenProps} from '@/Navigation/types';
 
 export const Settings = ({navigation}: MoreStackScreenProps<'Settings'>) => {
+  const dispatch = useAppDispatch();
+
   return (
     <AppScreen>
       <MenuItem
@@ -11,8 +16,9 @@ export const Settings = ({navigation}: MoreStackScreenProps<'Settings'>) => {
         onPress={() => navigation.navigate('ContactUs')}
       />
       <MenuItem
-        title="Contact Us"
-        onPress={() => navigation.navigate('ContactUs')}
+        fontColor={COLORS.RED_300}
+        title="Logout"
+        onPress={() => dispatch(setIsSignedOut())}
       />
     </AppScreen>
   );

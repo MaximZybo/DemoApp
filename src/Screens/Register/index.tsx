@@ -14,7 +14,7 @@ import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput, TBaseInputProps} from '@/Components/Inputs/BaseInput';
 import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
-import {Typography} from '@/Components/Typography';
+import {Label} from '@/Components/Label';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 import {emulateRequest} from '@/Utils/dev';
 
@@ -170,12 +170,9 @@ export const Register = ({
         )}
         name="email"
       />
-      <Typography
-        size="14"
-        weight="semibold"
-        style={styles.passwordRequirement}>
+      <Label>
         Password should contain at least one lower/uppercase letter and number
-      </Typography>
+      </Label>
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
@@ -212,8 +209,5 @@ export const Register = ({
 const styles = StyleSheet.create({
   button: {
     marginTop: LAYOUTS.PADDING,
-  },
-  passwordRequirement: {
-    marginBottom: 12,
   },
 });

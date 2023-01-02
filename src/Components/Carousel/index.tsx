@@ -15,7 +15,10 @@ type TCarouselProps<Option> = {
   slides: Option[];
   renderKey: keyof Option;
   isAutoScroll: boolean;
-  renderSlide: (item: Option) => React.ReactNode[] | React.ReactNode;
+  renderSlide: (
+    item: Option,
+    index: number,
+  ) => React.ReactNode[] | React.ReactNode;
 };
 
 export function Carousel<Option>({
@@ -73,8 +76,8 @@ export function Carousel<Option>({
     }
   };
 
-  const renderItem = ({item}: ListRenderItemInfo<Option>) => (
-    <CarouselItem>{renderSlide(item)}</CarouselItem>
+  const renderItem = ({item, index}: ListRenderItemInfo<Option>) => (
+    <CarouselItem>{renderSlide(item, index)}</CarouselItem>
   );
 
   return (

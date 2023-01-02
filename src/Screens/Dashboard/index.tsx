@@ -1,16 +1,17 @@
 import React from 'react';
-import {Button, StyleSheet} from 'react-native';
-import {useAppDispatch} from '@/Hooks/redux';
-import {setIsSignedOut} from '@/Store/Profile/profileSlice';
+import {StyleSheet, View} from 'react-native';
+import {LAYOUTS} from '@/Constants/Layouts';
 import {AppScreen} from '@/Components/AppScreen';
 import {Carousel} from '@/Components/Carousel';
-import {SlideAccount, TSlideAccount} from '@/Components/Carousel/SlideAccount';
+import {SlideAccount} from '@/Components/Carousel/SlideAccount';
+import {Label} from '@/Components/Label';
+import {TAccount} from '@/Store/Profile/types';
 import {cards} from './data';
 
 export const Dashboard = () => {
-  const dispatch = useAppDispatch();
-
-  const renderSlide = (item: TSlideAccount) => <SlideAccount item={item} />;
+  const renderSlide = (item: TAccount, index: number) => (
+    <SlideAccount item={item} index={index} />
+  );
 
   return (
     <AppScreen contentContainerStyle={styles.container}>
@@ -20,7 +21,9 @@ export const Dashboard = () => {
         renderKey="number"
         renderSlide={renderSlide}
       />
-      <Button title="Sign Out" onPress={() => dispatch(setIsSignedOut())} />
+      <View style={styles.paddingContainer}>
+        <Label>Products</Label>
+      </View>
     </AppScreen>
   );
 };
@@ -28,5 +31,8 @@ export const Dashboard = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 0,
+  },
+  paddingContainer: {
+    paddingHorizontal: LAYOUTS.PADDING,
   },
 });

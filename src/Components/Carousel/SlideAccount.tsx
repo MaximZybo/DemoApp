@@ -1,23 +1,21 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {Typography} from '@/Components/Typography';
 import {COLORS} from '@/Constants/Colors';
-
-export type TSlideAccount = {
-  number: string;
-  type: string;
-  balance: number;
-  isActive: boolean;
-};
+import {Typography} from '@/Components/Typography';
+import {formatAmount} from '@/Utils/formatters';
+import {TAccount} from '@/Store/Profile/types';
 
 type TSlideAccountProps = {
-  item: TSlideAccount;
+  item: TAccount;
+  index: number;
 };
 
-export const SlideAccount = ({item}: TSlideAccountProps) => {
+export const SlideAccount = ({item, index}: TSlideAccountProps) => {
+  const isEven = index % 2 === 0;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isEven && styles.evenContainer]}>
       <View>
         <Typography size="14" style={styles.textContent}>
           {'Account number: '}
@@ -34,7 +32,7 @@ export const SlideAccount = ({item}: TSlideAccountProps) => {
         <Typography size="14">
           {'Balance: '}
           <Typography size="14" weight="semibold">
-            {item.balance}
+            {formatAmount(item.balance)}
           </Typography>
         </Typography>
       </View>
@@ -47,12 +45,15 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
     marginHorizontal: LAYOUTS.PADDING,
-    backgroundColor: COLORS.GREY_200,
+    backgroundColor: COLORS.GREY_300,
     borderRadius: 6,
     padding: LAYOUTS.PADDING,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  evenContainer: {
+    backgroundColor: COLORS.GREY_200,
   },
   textContent: {
     marginBottom: 4,
