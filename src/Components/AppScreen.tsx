@@ -27,7 +27,6 @@ export const AppScreen = ({
   const isSignedIn = useAppSelector(getIsSignedIn);
 
   const {top, bottom, left, right} = useSafeAreaInsets();
-  console.log(top, bottom, left, right);
   const paddingTop = Math.round(top);
   const paddingBottom = Math.round(bottom);
   const paddingLeft = Math.round(left);
