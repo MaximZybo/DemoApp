@@ -3,6 +3,7 @@ import {TBank} from '@/Store/Payments/types';
 import {TAccount} from '@/Store/Profile/types';
 
 export const NICKNAME_MIN_LENGTH = 6;
+export const ACCOUNT_NUMBER_LENGTH = 10;
 const PASSWORD_MIN_LENGTH = 6;
 
 export const VALIDATION = {
@@ -10,6 +11,9 @@ export const VALIDATION = {
   stringOptional: string().optional(),
   booleanRequired: boolean().required(''),
   numberRequired: number().required(''),
+  accountNumber: string()
+    .required('')
+    .length(ACCOUNT_NUMBER_LENGTH, 'Should contain 10 symbols'),
   nickName: string()
     .required('')
     .min(NICKNAME_MIN_LENGTH, `Min length is ${NICKNAME_MIN_LENGTH}`),

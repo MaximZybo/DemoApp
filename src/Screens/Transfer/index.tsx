@@ -6,7 +6,8 @@ import {object, SchemaOf} from 'yup';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {VALIDATION, bankSchema, accountSchema} from '@/Constants/Validation';
 import {AppScreen} from '@/Components/AppScreen';
-import {BaseInput} from '@/Components/Inputs/BaseInput';
+import {NumericInput} from '@/Components/Inputs/NumericInput';
+import {AmountInput} from '@/Components/Inputs/AmountInput';
 import {Button} from '@/Components/Buttons/Button';
 import {AccountSelector} from '@/Components/SelectPicker/AccountSelector';
 import {BankSelector} from '@/Components/SelectPicker/BankSelector';
@@ -26,7 +27,7 @@ type TFormData = {
 const schema: SchemaOf<TFormData> = object({
   sourceAccount: accountSchema,
   bank: bankSchema,
-  destinationAccount: VALIDATION.stringRequired,
+  destinationAccount: VALIDATION.accountNumber,
   amount: VALIDATION.stringRequired,
 });
 
@@ -39,7 +40,9 @@ export const Transfer = ({}: BillsStackScreenProps<'Transfer'>) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (formData: TFormData) => {};
+  const onSubmit = (formData: TFormData) => {
+    console.log(formData);
+  };
 
   return (
     <AppScreen headerTitle="Transfer">
@@ -70,8 +73,9 @@ export const Transfer = ({}: BillsStackScreenProps<'Transfer'>) => {
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
-          <BaseInput
+          <NumericInput
             label="Destination Account"
+            type="account"
             onChangeText={onChange}
             value={value}
             error={errors.destinationAccount}
@@ -82,8 +86,7 @@ export const Transfer = ({}: BillsStackScreenProps<'Transfer'>) => {
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
-          <BaseInput
-            label="Amount"
+          <AmountInput
             onChangeText={onChange}
             value={value}
             error={errors.amount}
