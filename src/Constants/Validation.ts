@@ -1,4 +1,6 @@
-import {string, ref} from 'yup';
+import {object, string, ref, SchemaOf, number, boolean} from 'yup';
+import {TBank} from '@/Store/Payments/types';
+import {TAccount} from '@/Store/Profile/types';
 
 export const NICKNAME_MIN_LENGTH = 6;
 const PASSWORD_MIN_LENGTH = 6;
@@ -26,3 +28,15 @@ export const VALIDATION = {
     .required('')
     .oneOf([ref('password')], "Passwords don't match"),
 };
+
+export const bankSchema: SchemaOf<TBank> = object({
+  code: string().required(),
+  name: string().required(),
+});
+
+export const accountSchema: SchemaOf<TAccount> = object({
+  balance: number().required(),
+  isActive: boolean().required(),
+  number: string().required(),
+  type: string().required(),
+});

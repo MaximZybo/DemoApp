@@ -59,6 +59,7 @@ export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
 export type BillsStackParamList = {
   BillsManagement: undefined;
   Transactions: undefined;
+  Transfer: undefined;
 };
 
 export type BillsStackScreenProps<T extends keyof BillsStackParamList> =

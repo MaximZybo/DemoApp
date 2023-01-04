@@ -4,10 +4,10 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {ConditionalWrapper} from './ConditionalWrapper';
-import {Header} from './Header';
 import {useAppSelector} from '@/Hooks/redux';
 import {getIsSignedIn} from '@/Store/Profile/selectors';
+import {ConditionalWrapper} from './ConditionalWrapper';
+import {Header} from './Header';
 
 type TAppScreenProps = {
   children: React.ReactNode[] | React.ReactNode;

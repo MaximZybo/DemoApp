@@ -9,8 +9,12 @@ export const BillsManagement = ({
   return (
     <AppScreen>
       <MenuItem
-        title="Transactions"
+        title="Transactions List"
         onPress={() => navigation.navigate('Transactions')}
+      />
+      <MenuItem
+        title="Transfer"
+        onPress={() => navigation.navigate('Transfer')}
       />
     </AppScreen>
   );

@@ -11,18 +11,19 @@ import {
   ColorValue,
 } from 'react-native';
 import {FieldError} from 'react-hook-form';
-import {Check, Attention, Eye, EyeCrossed} from '@/Assets/Svg';
 import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {Typography} from '../Typography';
-import {ConditionalWrapper} from '../ConditionalWrapper';
-import {PressableOpacity} from '../Buttons/PressableOpacity';
+import {Check, Attention, Eye, EyeCrossed, ChevronDown} from '@/Assets/Svg';
+import {Typography} from '@/Components/Typography';
+import {ConditionalWrapper} from '@/Components/ConditionalWrapper';
+import {PressableOpacity} from '@/Components/Buttons/PressableOpacity';
 
 const icons = {
   eye: Eye,
   eyeCrossed: EyeCrossed,
   check: Check,
   attention: Attention,
+  chevronDown: ChevronDown,
 };
 
 const HORIZONTAL_PADDING = 12;
@@ -34,6 +35,7 @@ export type TBaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void; // Replace optional to required
   icon?: TIcon;
   iconColor?: ColorValue;
+  onPress?: () => void;
   onIconPress?: () => void;
   label?: string;
   error?: FieldError;
@@ -44,6 +46,7 @@ export const BaseInput = ({
   icon,
   iconColor = COLORS.ICON_DEFAULT,
   onIconPress,
+  onPress,
   label,
   error,
   style,
@@ -93,7 +96,7 @@ export const BaseInput = ({
   );
 
   const renderBaseInput = () => (
-    <>
+    <View style={baseInputStyles}>
       <TextInput
         style={[styles.baseTextInput, {paddingRight: rightPadding}, style]}
         placeholderTextColor={COLORS.GREY_300}
@@ -113,13 +116,23 @@ export const BaseInput = ({
           {renderIcon()}
         </ConditionalWrapper>
       </View>
-    </>
+    </View>
   );
 
   return (
     <View style={styles.container}>
       {!!label && renderLabel()}
-      <View style={baseInputStyles}>{renderBaseInput()}</View>
+      <View style={styles.innerContainer}>
+        <ConditionalWrapper
+          condition={!!onPress}
+          wrapper={(wrapperChildren: React.ReactNode) => (
+            <PressableOpacity onPress={onPress}>
+              <View pointerEvents="none">{wrapperChildren}</View>
+            </PressableOpacity>
+          )}>
+          {renderBaseInput()}
+        </ConditionalWrapper>
+      </View>
       {renderBottomError()}
     </View>
   );
@@ -127,18 +140,20 @@ export const BaseInput = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 5,
+    marginBottom: 6,
+  },
+  innerContainer: {
+    marginVertical: 6,
   },
   baseContainer: {
-    marginVertical: 5,
-    borderRadius: 5,
+    borderRadius: 6,
     borderWidth: 1,
     borderColor: COLORS.GREY_700,
     backgroundColor: COLORS.WHITE,
   },
   baseTextInput: {
     fontFamily: 'KumbhSans-regular',
-    fontSize: 16,
+    fontSize: 14,
     paddingLeft: HORIZONTAL_PADDING,
     height: 45,
     color: COLORS.GREY_800,

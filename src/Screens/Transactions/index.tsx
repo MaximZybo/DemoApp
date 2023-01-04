@@ -2,6 +2,8 @@ import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {AppScreen} from '@/Components/AppScreen';
 import {TransactionItem} from '@/Components/TransactionItem';
+import {ListSeparator} from '@/Components/ListSeparator';
+import {LAYOUTS} from '@/Constants/Layouts';
 import {transactions} from './data';
 
 export const Transactions = () => {
@@ -9,9 +11,11 @@ export const Transactions = () => {
     <AppScreen
       headerTitle="Transactions"
       isScroll={false}
-      contentContainerStyle={styles.contentContainer}>
+      contentContainerStyle={styles.screenContainer}>
       <FlatList
         data={transactions}
+        contentContainerStyle={styles.listContainer}
+        ItemSeparatorComponent={ListSeparator}
         renderItem={({item}) => <TransactionItem item={item} />}
       />
     </AppScreen>
@@ -19,7 +23,11 @@ export const Transactions = () => {
 };
 
 const styles = StyleSheet.create({
-  contentContainer: {
+  screenContainer: {
     paddingBottom: 0,
+    paddingTop: 0,
+  },
+  listContainer: {
+    paddingVertical: LAYOUTS.PADDING,
   },
 });

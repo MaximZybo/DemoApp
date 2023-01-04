@@ -6,7 +6,7 @@ import {Carousel} from '@/Components/Carousel';
 import {SlideAccount} from '@/Components/Carousel/SlideAccount';
 import {Label} from '@/Components/Label';
 import {TAccount} from '@/Store/Profile/types';
-import {cards} from './data';
+import {accounts} from '@/Mock';
 
 export const Dashboard = () => {
   const renderSlide = (item: TAccount, index: number) => (
@@ -17,7 +17,7 @@ export const Dashboard = () => {
     <AppScreen contentContainerStyle={styles.container}>
       <Carousel
         isAutoScroll={false}
-        slides={cards}
+        slides={accounts}
         renderKey="number"
         renderSlide={renderSlide}
       />

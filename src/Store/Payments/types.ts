@@ -5,3 +5,8 @@ export type TTransaction = {
   date: number;
   isIncoming: boolean;
 };
+
+export type TBank = {
+  code: string;
+  name: string;
+};
