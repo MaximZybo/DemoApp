@@ -1,14 +1,20 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import {Merge, FieldError, FieldErrorsImpl} from 'react-hook-form';
 import {Typography} from '@/Components/Typography';
 import {formatAmount} from '@/Utils/formatters';
 import {TAccount} from '@/Store/Profile/types';
 import {SelectPicker, TSelectPickerChildProps} from '.';
 
+type TAccountSelectorProps = {
+  error?: Merge<FieldError, FieldErrorsImpl<TAccount>>;
+};
+
 export const AccountSelector = ({
   value,
+  error,
   ...rest
-}: TSelectPickerChildProps<TAccount>) => {
+}: TAccountSelectorProps & TSelectPickerChildProps<TAccount>) => {
   const renderItem = (item: TAccount) => {
     return (
       <>
@@ -38,6 +44,7 @@ export const AccountSelector = ({
     <SelectPicker
       label="Source Account"
       value={value?.number}
+      error={error?.number}
       renderItem={renderItem}
       {...rest}
     />

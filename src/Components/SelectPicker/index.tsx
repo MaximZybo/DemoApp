@@ -16,9 +16,12 @@ import {ListSeparator} from '@/Components/ListSeparator';
 
 export type TSelectPickerChildProps<Option> = {
   value: Option | undefined;
-} & Omit<TSelectPickerProps<Option>, 'renderItem' | 'value' | 'label'>;
+} & Omit<
+  TSelectPickerProps<Option>,
+  'renderItem' | 'value' | 'label' | 'error'
+>;
 
-export type TSelectPickerProps<Option> = {
+type TSelectPickerProps<Option> = {
   items: Option[];
   onSelect: (item: Option) => void;
   renderItem: (item: Option) => React.ReactNode;
@@ -101,7 +104,7 @@ export function SelectPicker<Option>({
 
 const styles = StyleSheet.create({
   modalPressable: {
-    height: '30%',
+    height: '25%',
     backgroundColor: COLORS.MODAL_BACKGROUND,
   },
   listTitle: {

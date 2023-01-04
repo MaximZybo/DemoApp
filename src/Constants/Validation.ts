@@ -8,6 +8,8 @@ const PASSWORD_MIN_LENGTH = 6;
 export const VALIDATION = {
   stringRequired: string().required(''),
   stringOptional: string().optional(),
+  booleanRequired: boolean().required(''),
+  numberRequired: number().required(''),
   nickName: string()
     .required('')
     .min(NICKNAME_MIN_LENGTH, `Min length is ${NICKNAME_MIN_LENGTH}`),
@@ -30,13 +32,13 @@ export const VALIDATION = {
 };
 
 export const bankSchema: SchemaOf<TBank> = object({
-  code: string().required(),
-  name: string().required(),
+  code: VALIDATION.stringRequired,
+  name: VALIDATION.stringRequired,
 });
 
 export const accountSchema: SchemaOf<TAccount> = object({
-  balance: number().required(),
-  isActive: boolean().required(),
-  number: string().required(),
-  type: string().required(),
+  balance: VALIDATION.numberRequired,
+  isActive: VALIDATION.booleanRequired,
+  number: VALIDATION.stringRequired,
+  type: VALIDATION.stringRequired,
 });
