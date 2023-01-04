@@ -5,7 +5,7 @@ const initialState: TProfileState = {
   isSignedIn: false,
 };
 
-export const profileSlice = createSlice({
+const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
