@@ -1,17 +1,23 @@
 import React, {useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import ReactNativeBiometrics from 'react-native-biometrics';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {object, SchemaOf} from 'yup';
-import {useAppDispatch} from '@/Hooks/redux';
+import {useAppDispatch, useAppSelector} from '@/Hooks/redux';
+import {useBiometrics} from '@/Hooks/useBiometrics';
 import {setIsSignedIn} from '@/Store/Profile/profileSlice';
+import {getIsBiometryEnabled} from '@/Store/Persist/selectors';
 import {getCredentials, setCredentials} from '@/Utils/Storage/authStorage';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {VALIDATION} from '@/Constants/Validation';
+import {COLORS} from '@/Constants/Colors';
 import {AppScreen} from '@/Components/AppScreen';
 import {BaseInput} from '@/Components/Inputs/BaseInput';
 import {PasswordInput} from '@/Components/Inputs/PasswordInput';
 import {Button} from '@/Components/Buttons/Button';
+import {PressableOpacity} from '@/Components/Buttons/PressableOpacity';
+import {Fingerprint} from '@/Assets/Svg';
 import {BeforeAuthStackScreenProps} from '@/Navigation/types';
 import {emulateRequest} from '@/Utils/dev';
 
@@ -32,6 +38,10 @@ export const Login = ({
   const initialLogin = route.params?.login;
 
   const dispatch = useAppDispatch();
+
+  const isBiometryEnabled = useAppSelector(getIsBiometryEnabled);
+
+  const {isSensorAvailable} = useBiometrics();
 
   const {
     control,
@@ -67,6 +77,36 @@ export const Login = ({
       });
   };
 
+  const biometricsSignIn = () => {
+    const rnBiometrics = new ReactNativeBiometrics();
+
+    rnBiometrics
+      .simplePrompt({promptMessage: 'Confirm biometrics'})
+      .then(({success}) => {
+        if (success) {
+          getCredentials()
+            .then(credentials => {
+              if (credentials) {
+                emulateRequest(1000, credentials.userId === 'Testing')
+                  .then(() => {
+                    dispatch(setIsSignedIn());
+                  })
+                  .catch(() => {
+                    // if response says that the password is incorrect,
+                    // disable biometrics usage
+                  });
+              }
+            })
+            .catch(() => {
+              // send error report
+            });
+        }
+      })
+      .catch(() => {
+        // send error report
+      });
+  };
+
   return (
     <AppScreen headerTitle="Login">
       <Controller
@@ -93,17 +133,38 @@ export const Login = ({
         )}
         name="password"
       />
-      <Button
-        title="Login"
-        onPress={handleSubmit(onSubmit)}
-        style={styles.button}
-      />
+      <View style={styles.buttonsContainer}>
+        <Button
+          title="Login"
+          onPress={handleSubmit(onSubmit)}
+          style={styles.buttonLogin}
+        />
+        {isBiometryEnabled && isSensorAvailable && (
+          <PressableOpacity
+            onPress={biometricsSignIn}
+            style={styles.buttonBiometrics}>
+            <Fingerprint color={COLORS.ICON_DEFAULT} />
+          </PressableOpacity>
+        )}
+      </View>
     </AppScreen>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
+  buttonsContainer: {
+    flexDirection: 'row',
     marginTop: LAYOUTS.PADDING,
+    alignItems: 'center',
+  },
+  buttonLogin: {
+    flex: 1,
+    marginBottom: 0,
+  },
+  buttonBiometrics: {
+    marginLeft: LAYOUTS.PADDING,
+    backgroundColor: COLORS.GREEN_400,
+    padding: 10,
+    borderRadius: 22,
   },
 });

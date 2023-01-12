@@ -1,14 +1,15 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 import {Typography} from '@/Components/Typography';
 
 type TLabelProps = {
   children: string;
+  style?: StyleProp<TextStyle>;
 };
 
-export const Label = ({children}: TLabelProps) => {
+export const Label = ({children, style}: TLabelProps) => {
   return (
-    <Typography size="14" weight="semibold" style={styles.label}>
+    <Typography size="14" weight="semibold" style={[styles.label, style]}>
       {children}
     </Typography>
   );

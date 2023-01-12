@@ -69,8 +69,9 @@ export type BillsStackScreenProps<T extends keyof BillsStackParamList> =
   >;
 
 export type MoreStackParamList = {
-  ContactUs: undefined;
   Settings: undefined;
+  ContactUs: undefined;
+  Biometrics: undefined;
 };
 
 export type MoreStackScreenProps<T extends keyof MoreStackParamList> =

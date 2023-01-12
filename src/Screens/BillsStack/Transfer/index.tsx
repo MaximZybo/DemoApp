@@ -14,7 +14,6 @@ import {BankSelector} from '@/Components/SelectPicker/BankSelector';
 import {BillsStackScreenProps} from '@/Navigation/types';
 import {TAccount} from '@/Store/Profile/types';
 import {TBank} from '@/Store/Payments/types';
-import {emulateRequest} from '@/Utils/dev';
 import {accounts, banks} from '@/Mock/index';
 
 type TFormData = {

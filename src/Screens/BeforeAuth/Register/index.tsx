@@ -70,7 +70,9 @@ export const Register = ({
     if (nickName.length >= NICKNAME_MIN_LENGTH && !isNickChecked) {
       emulateRequest(1500, nickName === 'Testing')
         .then(() => setValue('isNickValidated', true))
-        .catch(() => {})
+        .catch(() => {
+          // send error report
+        })
         .finally(() => {
           setValue('isNickChecked', true);
           trigger('nickName');

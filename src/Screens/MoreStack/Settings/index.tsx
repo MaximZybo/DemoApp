@@ -16,6 +16,10 @@ export const Settings = ({navigation}: MoreStackScreenProps<'Settings'>) => {
         onPress={() => navigation.navigate('ContactUs')}
       />
       <MenuItem
+        title="Biometrics"
+        onPress={() => navigation.navigate('Biometrics')}
+      />
+      <MenuItem
         fontColor={COLORS.RED_300}
         title="Logout"
         onPress={() => dispatch(setIsSignedOut())}
