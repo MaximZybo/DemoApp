@@ -4,7 +4,7 @@ import {AppScreen} from '@/Components/AppScreen';
 import {TransactionItem} from '@/Components/TransactionItem';
 import {ListSeparator} from '@/Components/ListSeparator';
 import {LAYOUTS} from '@/Constants/Layouts';
-import {transactions} from './data';
+import {transactions} from '@/Mock';
 
 export const Transactions = () => {
   return (

@@ -10,8 +10,8 @@ export const useBiometrics = () => {
 
     rnBiometrics
       .isSensorAvailable()
-      .then(({biometryType}) => {
-        setIsSensorAvailable(!!biometryType);
+      .then(({available}) => {
+        setIsSensorAvailable(available);
       })
       .catch(() => {
         // send error report
