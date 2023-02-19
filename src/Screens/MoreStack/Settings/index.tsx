@@ -20,6 +20,10 @@ export const Settings = ({navigation}: MoreStackScreenProps<'Settings'>) => {
         onPress={() => navigation.navigate('Biometrics')}
       />
       <MenuItem
+        title="ID Upload"
+        onPress={() => navigation.navigate('IDUpload')}
+      />
+      <MenuItem
         fontColor={COLORS.RED_300}
         title="Logout"
         onPress={() => dispatch(setIsSignedOut())}

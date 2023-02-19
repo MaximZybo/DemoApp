@@ -66,7 +66,7 @@ export const Login = ({
   }, [setValue]);
 
   const onSubmit = (data: TFormData) => {
-    emulateRequest(1000, data.login === 'Testing')
+    emulateRequest(1000, true)
       .then(() => {
         setCredentials({userId: data.login, password: data.password});
 

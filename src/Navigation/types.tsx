@@ -72,6 +72,7 @@ export type MoreStackParamList = {
   Settings: undefined;
   ContactUs: undefined;
   Biometrics: undefined;
+  IDUpload: undefined;
 };
 
 export type MoreStackScreenProps<T extends keyof MoreStackParamList> =
