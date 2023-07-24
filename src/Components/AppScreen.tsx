@@ -6,7 +6,6 @@ import {COLORS} from '@/Constants/Colors';
 import {LAYOUTS} from '@/Constants/Layouts';
 import {useAppSelector} from '@/Hooks/redux';
 import {getIsSignedIn} from '@/Store/Profile/selectors';
-import {ConditionalWrapper} from './ConditionalWrapper';
 import {Header} from './Header';
 
 type TAppScreenProps = {
@@ -50,23 +49,26 @@ export const AppScreen = ({
           paddingRight={paddingRight}
         />
       )}
-      <ConditionalWrapper
-        condition={isScroll}
-        wrapper={(wrapperChildren: React.ReactNode) => (
-          <KeyboardAwareScrollView
-            showsVerticalScrollIndicator={false}
-            enableOnAndroid
-            style={styles.scroll}
-            contentContainerStyle={styles.scrollContainer}>
-            <>{wrapperChildren}</>
-          </KeyboardAwareScrollView>
-        )}>
+      {isScroll ? (
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          enableOnAndroid
+          style={styles.scroll}
+          contentContainerStyle={styles.scrollContainer}>
+          <View
+            style={[styles.safeAreaHorizontal, {paddingLeft, paddingRight}]}>
+            <View style={[styles.contentContainer, contentContainerStyle]}>
+              {children}
+            </View>
+          </View>
+        </KeyboardAwareScrollView>
+      ) : (
         <View style={[styles.safeAreaHorizontal, {paddingLeft, paddingRight}]}>
           <View style={[styles.contentContainer, contentContainerStyle]}>
             {children}
           </View>
         </View>
-      </ConditionalWrapper>
+      )}
     </View>
   );
 };
